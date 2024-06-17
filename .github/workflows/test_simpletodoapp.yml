@@ -65,14 +65,3 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9A2D3BEBE16A4A20B5255692A1BC0AD5 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_87AEFA0270414620AA159112B21C54E3 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_555B17FF24E2402295498AE55A7BB93A }}
-
-      - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
-        id: deploy-to-webapp
-        with:
-          app-name: 'simpletodoapp'
-          slot-name: 'Production'
-          
