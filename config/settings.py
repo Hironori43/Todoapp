@@ -126,3 +126,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/accounts/login/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+ALLOWED_HOSTS = ['simpletodoapp.azurewebsites.net', 'anotherhost.com', 'localhost']
