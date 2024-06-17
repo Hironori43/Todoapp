@@ -1,0 +1,52 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>ログイン</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 400px; /* 幅を広げる */
+            background: white;
+            padding: 40px; /* パディングを増やす */
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* シャドウを強調 */
+        }
+        .login-container h1 {
+            margin-bottom: 30px; /* マージンを増やす */
+            font-size: 1.5em; /* フォントサイズを大きく */
+        }
+        .btn {
+            font-size: 1.2em; /* ボタンのフォントサイズを大きく */
+            padding: 10px; /* ボタンのパディングを増やす */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>ログイン</h1>
+        <form autocomplete="off" action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-block" value="ログイン">
+            </div>
+        </form>
+        <button class="btn btn-secondary btn-block" onclick="location.href='http://localhost:8000/signup/'">新規登録</button>
+    </div>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

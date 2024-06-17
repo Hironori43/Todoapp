@@ -1,0 +1,45 @@
+{% extends 'todo/base.html' %}
+
+{% block header %}
+{% if action == 'create' %}
+<h1>タスクの作成</h1>
+{% elif action == 'update' %}
+<h1>タスクの編集</h1>
+{% endif %}
+{% endblock header %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>
+                    <label for="id_title">タスク名:</label>
+                </th>
+                <td>
+                    <input type="text" name="title" maxlength="15" required id="id_title" value="{{ task.title }}">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="id_description">詳細:</label>
+                </th>
+                <td>
+                    <textarea name="description" cols="40" rows="10" id="id_description">{{ task.description }}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="id_deadline">締め切り:</label>
+                </th>
+                <td>
+                    <input type="date" name="deadline" required id="id_deadline" value="{{ task.deadline }}">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-outline-secondary" href="{% url 'list' %}" role="button">戻る</a>
+    <input class="btn btn-success" type="submit" value="{% if action == 'create' %}作成{% elif action == 'update' %}更新{% endif %}">
+</form>
+{% endblock content %}
