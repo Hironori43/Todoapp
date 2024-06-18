@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/d3735c12-3913-4197-a3a3-f443c24071b1/resourceGroups/simpletodoapp_group/providers/Microsoft.Web/sites/simpletodoapp",
+    "appService.deploySubpath": "."
+}

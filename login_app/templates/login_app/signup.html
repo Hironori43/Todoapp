@@ -39,6 +39,16 @@
             padding: 10px;
             font-size: 1em;
         }
+        .errorlist {
+            color: red;
+            margin-top: 5px;
+            margin-bottom: 0;
+        }
+        .condition {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #dc3545; /* Bootstrap のエラーカラーに合わせる */
+        }
     </style>
 </head>
 <body>
@@ -46,28 +56,45 @@
         <h1>ユーザー登録</h1>
         <form autocomplete="off" action="{% url 'signup' %}" method="post">
             {% csrf_token %}
-            <div class="form-group row">
-                <label for="id_username" class="col-sm-4 col-form-label">ユーザー名</label>
-                <div class="col-sm-8">
-                    {{ form.username }}
-                </div>
+            <div class="form-group">
+                <label for="id_username">ユーザー名</label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
-            <div class="form-group row">
-                <label for="id_password1" class="col-sm-4 col-form-label">パスワード</label>
-                <div class="col-sm-8">
-                    {{ form.password1 }}
-                </div>
+            <div class="form-group">
+                <label for="id_password1">パスワード</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.password1.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <p class="condition">
+                    パスワードは最低8文字以上必要です。<br>
+                    数字だけのパスワードは使えません。
+                </p>
             </div>
-            <div class="form-group row">
-                <label for="id_password2" class="col-sm-4 col-form-label">パスワード確認</label>
-                <div class="col-sm-8">
-                    {{ form.password2 }}
-                </div>
+            <div class="form-group">
+                <label for="id_password2">パスワード確認</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.password2.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
-            <div class="form-group row">
-                <div class="col-sm-8 offset-sm-2">
-                    <input type="submit" class="btn btn-primary btn-block" value="登録">
-                </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-block" value="登録">
             </div>
         </form>
     </div>
