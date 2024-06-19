@@ -24,7 +24,7 @@ class TodoList(LoginRequiredMixin, ListView):
         context['current_sort'] = self.request.GET.get('sort', 'deadline_asc')
         return context
     
-class TodoDetail(DetailView):
+class TodoDetail(LoginRequiredMixin,DetailView):
         model = Todo
         # テンプレート内では、ToDoリストがtaskという名前で利用可能
         context_object_name = "task"

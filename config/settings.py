@@ -1,13 +1,15 @@
+
 import os
+
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your_secret_key_here')
+SECRET_KEY = 'django-insecure-r!km7a$09l@@cduj_t6f$93ld#at!&8k!n2%t0x6ffurrz*9xg'
 
 DEBUG = False
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'login_app',
@@ -53,7 +55,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join('/home', 'db.sqlite3'),  # 永続ストレージに変更
     }
 }
 
@@ -86,4 +88,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/accounts/login/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
-ALLOWED_HOSTS = ['simpletodoapp.azurewebsites.net', 'anotherhost.com', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://simpletodoapp.azurewebsites.net']
