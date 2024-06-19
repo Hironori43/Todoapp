@@ -18,15 +18,15 @@
                     <label for="id_title">タスク名:</label>
                 </th>
                 <td>
-                    <input type="text" name="title" maxlength="15" required id="id_title" value="{{ task.title }}">
+                    <input type="text" name="title" maxlength="15" required id="id_title" value="{{ form.title.value|default_if_none:'' }}">
                 </td>
             </tr>
             <tr>
                 <th>
-                    <label for="id_description">詳細:</label>
+                    <label for="id_description">内容:</label>
                 </th>
                 <td>
-                    <textarea name="description" cols="40" rows="10" id="id_description">{{ task.description }}</textarea>
+                    <textarea name="description" cols="40" rows="10" id="id_description">{{ form.description.value|default_if_none:'' }}</textarea>
                 </td>
             </tr>
             <tr>
@@ -34,7 +34,7 @@
                     <label for="id_deadline">締め切り:</label>
                 </th>
                 <td>
-                    <input type="date" name="deadline" required id="id_deadline" value="{{ task.deadline }}">
+                    <input type="date" name="deadline" required id="id_deadline" value="{{ form.deadline.value|date:'Y-m-d' }}">
                 </td>
             </tr>
         </tbody>

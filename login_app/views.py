@@ -65,7 +65,13 @@ def logout_confirm(request):
         return render(request, 'login_app/logout_confirm.html')
     return JsonResponse({'error': 'Only GET and POST methods are allowed'})
 
-def logout_view(request):
-    logout(request)
-    
-    return render(request, 'login_app/logout.html')
+def logout_confirm(request):
+    if request.method == 'POST':
+        logout(request)
+        login_url = reverse('login')
+        return HttpResponseRedirect(login_url)
+    elif request.method == 'GET':
+        if 'cancel' in request.GET:
+            return redirect(reverse('list'))
+        return render(request, 'login_app/logout_confirm.html')
+    return JsonResponse({'error': 'Only GET and POST methods are allowed'})

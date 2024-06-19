@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Todo
-
+from .forms import TodoForm
 
 class TodoList(LoginRequiredMixin, ListView):
     # このビューで作成するモデルの指定
@@ -50,18 +50,16 @@ class TodoCreate(LoginRequiredMixin, CreateView):
         context['action'] = 'create'
         return context
     
-class TodoUpdate(UpdateView):
+class TodoUpdate(LoginRequiredMixin, UpdateView):
     model = Todo
-    fields = ['title', 'description', 'deadline']
-    success_url = reverse_lazy('list')
+    form_class = TodoForm
     template_name = 'todo/todo_form.html'
+    success_url = reverse_lazy('list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # actionキーにupdateを割り当て
         context['action'] = 'update'
-        # ビューで更新されるTodoインスタンスの取得、ここで現在のTodoを渡す
-        context['task'] = self.get_object() 
+        context['task'] = self.object
         return context
     
 class TodoDelete(DeleteView):
