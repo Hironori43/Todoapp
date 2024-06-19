@@ -2,7 +2,7 @@
 
 {% block header %}
 <h1>Todo list</h1>
-<p><a href="{% url 'create' %}">新規作成</a><p>
+<p><a href="{% url 'create' %}">新規作成</a></p>
 <p><a href="{% url 'logout_confirm' %}">ログアウト</a></p>
 {% endblock header %}
 
@@ -14,30 +14,39 @@
         <option value="?sort=deadline_desc" {% if current_sort == 'deadline_desc' %}selected{% endif %}>降順</option>
     </select>
 </div>
-<div class="shadow-sm p-3 mb-5 bg-white rounded">
 
-<table class="table table-bordered">  
-    <thead>
-        <tr>
-            <th scope="col">タスク名</th>
-            <th scope="col">締め切り</th>
-            <th scope="col">内容</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for task in tasks %}
-    <tr>
-        <td>{{task.title}}</td>
-        <td>{{task.deadline}}</td>
-        <td class="ellipsis">{{task.description}}</td>
-        <td><a href="{% url 'detail' task.pk %}">詳細</a></td>
-        <td><a href="{% url 'update' task.pk %}">編集</a></td>
-        <td><a href="{% url 'delete' task.pk %}">削除</a></td>
-    </tr>
-    {% endfor %}
-    
-    </tbody>
-</table>
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <style>
+        .table th {
+            text-align: center;
+        }
+    </style>
+    <table class="table table-bordered" style="width: 100%;">
+        <thead>
+            <tr>
+                <th scope="col">タスク名</th>
+                <th scope="col">締め切り</th>
+                <th scope="col">内容</th>
+                <th scope="col">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{task.title}}</td>
+                <td>{{task.deadline}}</td>
+                <td class="ellipsis">{{task.description}}</td>
+                <td>
+                    <a href="{% url 'detail' task.pk %}">詳細</a> |
+                    <a href="{% url 'update' task.pk %}">編集</a> |
+                    <a href="{% url 'delete' task.pk %}">削除</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const maxLength = 20; // 省略する文字数を設定
